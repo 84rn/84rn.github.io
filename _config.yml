@@ -4,7 +4,7 @@ email:       bart.bartyzel@gmail.com
 author:      Bart Bartyzel
 description: "A place for my own notes, code snippets and weird articles."
 baseurl:     ""
-url:         "http://localhost:4000"
+url:         "http://84rn.github.io"
 
 # Google analytics
 google_analytics:
