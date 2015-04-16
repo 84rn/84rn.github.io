@@ -272,7 +272,7 @@ pre {
   padding: 1.125em;
   font-size: 1rem;
   line-height: 1.11;
-  overflow-x: scroll;
+  overflow-x: auto;
   margin-bottom: 0.88em;
 }
 
@@ -282,7 +282,7 @@ pre {
 }
 
 blockquote {
-  padding: 1.33em;
+  padding: 0.5em;
   font-style: italic;
   border-left: 5px solid #7a7a7a;
 }
@@ -366,7 +366,7 @@ h6,
   .p,
   p,
   li {
-    font-size: 1.25rem;
+    font-size: 1.0rem;
     line-height: 1.8;
   }
 
