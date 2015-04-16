@@ -2,7 +2,7 @@
 layout:     post
 title:      constexpr explained
 date:       2015-04-16 20:47:01
-summary:    The new standard introduces the <i>constexpr</i> keyword. In this post I will try to explain when to use it, and provide some examples. 
+summary:    The new standard introduces the <i>constexpr</i> keyword. In this post I will try to explain when to use it and provide some examples. 
 categories: programming c++11 
 ---
 
@@ -21,7 +21,7 @@ int max_file_size = 30;
 const int file_no = get_file_no();
 {% endhighlight %} 
  * A _literal_ (the number 20 in the first example) is a constant expression. The compiler knows the value, and the value cannot change. So when we initialize `const int literal_int`, we know it is a constant expression
- * `const int file_size` is initialized with a sum of a literal, and a constant expression. Each of them is a constant expression, therefore `file_size` is a constant expression
+ * `const int file_size` is initialized with a sum of a literal and a constant expression. Each of them is a constant expression, therefore `file_size` is a constant expression
  * `int max_file_size` is initialized with a constant expression. But the variable itself isn't const. That means - its value can, and probably will, change along the way. That is why it is **not** a constant expression.
  * The last variable is _const_, we know its value won't change. But is the init value know at compile time? No. The value will be know at run time. That is why it is **not** a constant expression (with one exception, which I will describe later).    
  
@@ -48,12 +48,12 @@ void f()
 	 constexpr int *pj = &j;		// Error - j is not a constant expression
 	 constexpr int &ri = i;		 // OK  
 	 constexpr int &rj = j;		 // Error!
-};
+}
 {% endhighlight %} 
 
 #### Pointers and _constexpr_
 
-Our beloved specifier **imposes** a top-level const on the pointer it applies to, and **not** on the object it points to. Therefore, in the example:
+Our beloved specifier **imposes** a top-level const on the pointer it applies to, **not** on the object it points to. Therefore, in the example:
 {% highlight c++ linenos %}
 const int *pa = nullptr;
 constexpr int *pb = nullptr;
@@ -85,15 +85,15 @@ constexpr int f()
   typedef int myint; 
   using myint2 = int; 
   return 2; 
-};
+}
 {% endhighlight %}
 
-Furthermore, the function **doesn't have to return a constant expression**. We can use such functions in different contexts. Let's write a function with one parameter, and use it to define an array, and initialize a plain `int` variable. 
+Furthermore, the function **doesn't have to return a constant expression**. We can use such functions in different contexts. Let's write a function with one parameter, use it to define an array, and initialize a plain `int` variable. 
 {% highlight c++ linenos %}
 constexpr int f(int p) 
 {  
   return p + 2; 
-};
+}
 {% endhighlight %}
 You can see that it has only one `return` statement, and one parameter. So for it to be a constant expression, the parameter also has to be one (if you recall, `2` is also a constant expression). 
 {% highlight c++ linenos %}
@@ -110,7 +110,7 @@ There's one more thing. _constexpr_ functions can be defined **multiple** times,
 
 #### But wait, this code compiles!
 
-If you are using GCC it is possible that the example above will compile. GCC supports C-style [Variable Length Arrays](https://gcc.gnu.org/onlinedocs/gcc/Variable-Length.html). The compiler will warn you if you use `-Wvla` or `-pedantic` flags. Normally, the C++11 would not allow it.
+If you are using GCC it is possible that the example above will compile. GCC supports C-style [Variable Length Arrays](https://gcc.gnu.org/onlinedocs/gcc/Variable-Length.html). The compiler will warn you if you use `-Wvla` or `-pedantic` flags. Normally, the C++11 standard would not allow it.
 
 ### _constexpr_ classes
 
@@ -153,8 +153,8 @@ _constexpr_ constructors have to initialize all members of the class. They can d
 class CEClass 
 {
 public:
-	constexpr CEClass(int mode) : cmode(mode) { };  // one constexpr constructor
-	constexpr int getMode() { return cmode; };		 // constexpr member
+	constexpr CEClass(int mode) : cmode(mode) { }  // one constexpr constructor
+	constexpr int getMode() { return cmode; }		 // constexpr member
 	~CEClass() = default;							  // default destructor
 private: 
 	int cmode;
