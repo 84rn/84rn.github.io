@@ -3,7 +3,7 @@ layout:     post
 title:      Hello, my little blog
 date:       2015-04-14 23:00:01
 summary:    The time has come to start a blog. Let's see how it goes.
-categories: blog offtopic
+categories: offtopic
 ---
 
 ## Hi!
